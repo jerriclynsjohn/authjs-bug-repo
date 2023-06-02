@@ -1,6 +1,6 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import { SvelteKitAuth } from '@auth/sveltekit';
-import EmailProvider from 'next-auth/providers/email';
+import Email from '@auth/core/providers/email';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { redirect, type Handle } from '@sveltejs/kit';
 import postmark from 'postmark';
@@ -43,7 +43,7 @@ const authenticate = SvelteKitAuth({
 	providers: [
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		EmailProvider({
+		Email({
 			normalizeIdentifier(identifier: string): string {
 				if (identifier.split('@').length > 2) {
 					throw new Error('Only one email allowed');
